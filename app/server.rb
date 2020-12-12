@@ -2,14 +2,12 @@
 require 'sinatra'
 require 'fileutils'
 require 'thread'
-require_relative 'yard'
+require_relative 'docs_builder'
 
-rebuild_queue = Queue.new
+builder = DocsBuilder.new(settings)
 
-get "/rebuild/#{ENV['REBUILD_TOKEN']}" do
-  rebuild_queue << true
-  'Rebuild request queued! Once processed docs will be updated.'
-end
+get("/rebuild/#{ENV['REBUILD_TOKEN']}") { builder.queue }
+post("/rebuild/#{ENV['REBUILD_TOKEN']}") { builder.queue }
 
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
@@ -19,12 +17,5 @@ not_found do
   '404'
 end
 
-Thread.new do
-  while rebuild_queue.pop
-    rebuild_queue.pop while rebuild_queue.size > 0
-    Yard.rebuild(settings)
-  end
-end
-
 settings.public_folder = nil
-Yard.rebuild(settings)
+builder.rebuild
