@@ -2,8 +2,8 @@ FROM ruby:alpine
 
 RUN mkdir -p /app/public
 
-RUN apk add git
-RUN gem install sinatra yard
+RUN apk add git g++ make musl-dev openssl-dev
+RUN gem install puma sinatra yard
 
 ENV RACK_ENV=production
 
