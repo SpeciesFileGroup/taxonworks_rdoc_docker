@@ -19,7 +19,7 @@ class DocsBuilder
     raise "Failed to fetch code" unless system("git clone https://github.com/SpeciesFileGroup/taxonworks.git --depth 1 #{tw_dir}")
     FileUtils.mkdir(doc_dir)
 
-    if system("yardoc taxonworks -o #{doc_dir} --no-save")
+    if system("cd '#{tw_dir}' && yardoc -o '#{doc_dir}' --no-save")
       old, @settings.public_folder = @settings.public_folder, doc_dir
       FileUtils.rm_rf(old) if old
     end
