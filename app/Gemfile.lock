@@ -3,6 +3,7 @@ GEM
   specs:
     base64 (0.3.0)
     logger (1.7.0)
+    minitest (5.27.0)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.5)
@@ -34,11 +35,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bundler (~> 2.5, >= 2.5.6)
+  minitest (~> 5.25)
   puma (~> 7.2)
   rackup (~> 2.1)
   sinatra (~> 4.2)
   yard (~> 0.9.44)
 
+RUBY VERSION
+   ruby 3.4.11p137
+
 BUNDLED WITH
-   2.5.23
+   2.6.9

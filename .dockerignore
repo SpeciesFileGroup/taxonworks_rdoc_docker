@@ -1,0 +1,8 @@
+.git
+.github
+.yardoc
+coverage
+tmp
+app/test
+README.md
+LICENSE.txt
